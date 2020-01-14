@@ -124,10 +124,10 @@ class KL_div(nn.Module):
         assert simplex(prob)
         assert simplex(target)
         b, c, *_ = target.shape
-        *_, ww, ll = target.shape
         kl = (-target * torch.log((prob + self.eps) / (target + self.eps))).sum(1)
         if self.reduce:
-            return kl.sum() / (float(b)*float(ww)*float(ll))
+            #return kl.sum() / float(b)
+            return kl.mean()
         return kl
 
 
